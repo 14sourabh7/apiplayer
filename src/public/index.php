@@ -65,7 +65,9 @@ $application = new Application($container);
 //config di
 $filename = '../app/config/config.php';
 $factory = new ConfigFactory();
+
 $config =  $factory->newInstance('php', $filename);
+
 $container->set(
     'config',
     $config,
