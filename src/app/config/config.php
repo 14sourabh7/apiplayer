@@ -10,6 +10,7 @@ return [
 
     ],
     'api' => [
-        'weather' => '0bab7dd1bacc418689b143833220304',
+        'key' => '0bab7dd1bacc418689b143833220304',
+        'base_url' => 'http://api.weatherapi.com/v1/'
     ]
 ];

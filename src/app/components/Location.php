@@ -3,15 +3,18 @@
 namespace App\Components;
 
 use Phalcon\Di\Injectable;
+use GuzzleHttp\Client;
 
 class Location extends injectable
 {
-    public $key;
+    private $key;
+    private $client;
 
     public function __construct()
     {
         //getting key from config
-        $this->key = $this->config->api->get('weather');
+        $this->key = $this->config->api->get('key');
+        $this->client = $this->setClient();
     }
 
     /**
@@ -35,5 +38,24 @@ class Location extends injectable
         $data = json_decode($body, true);
 
         return $data;
+    }
+
+
+    /**
+     * setClient()
+     * 
+     * function to initialze Guzzle
+     *
+     * @return $client object of class Client
+     */
+    private function setClient()
+    {
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => $this->config->api->get('base_url'),
+            // You can set any number of default request options.
+            'timeout'  => 2.0,
+        ]);
+        return $client;
     }
 }
