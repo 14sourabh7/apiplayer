@@ -5,7 +5,9 @@
                 <input type="search" class="form-control rounded" name='search' placeholder="Search for different city" aria-label="Search" aria-describedby="search-addon" />
             </div>
         </form>
-        <h2 class='text-center text-danger'>Displaying Results for <?php echo $city ?>!!</h2>
+        <h2 class='text-center text-danger'>
+            Displaying Results for <?php echo $city ?>!!
+        </h2>
 
         <hr>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -66,11 +68,11 @@
                 if ($details) {
 
                     foreach ($details as $key => $value) {
-                        if ($key == 'condition' || ($action == 'current' && $key == 'air_quality')) continue;
+                        if ($key == 'condition' || strpos($key, '_epoch')  || ($action == 'current' && $key == 'air_quality')) continue;
                     ?>
                         <div class="col-3 m-2 card">
                             <div class="card-body text-primary fw-bold"><?php echo $key; ?></div>
-                            <div class="card-body fs-4 fw-bold"><?php echo $value
+                            <div class="card-body fs-4 fw-bold"><?php echo is_numeric(($value)) ? round($value, 2) : $value;
                                                                 ?></div>
                         </div>
 
@@ -78,7 +80,9 @@
                 } else {
                     ?>
                     <div class="col m-2 card text-center">
-                        <div class="card-body text-primary fw-bold">No Alerts to show at this moment</div>
+                        <div class="card-body text-primary fw-bold">
+                            No Alerts to show at this moment
+                        </div>
 
                     </div>
             <?php

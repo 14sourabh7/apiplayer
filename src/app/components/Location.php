@@ -21,12 +21,15 @@ class Location extends injectable
      *
      * @param [type] $action
      * @param [type] $city
-     * @return void
+     * @return array
      */
     public function getDetails($action, $city)
     {
         //common request url for all type of operations from api
-        $response = $this->client->request('GET', "$action.json?key= $this->key&q=$city&days=1&aqi=yes&alerts=yes");
+        $response = $this->client->request(
+            'GET',
+            "$action.json?key= $this->key&q=$city&days=1&aqi=yes&alerts=yes"
+        );
 
         $body = $response->getBody();
         $data = json_decode($body, true);
